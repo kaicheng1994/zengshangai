@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body>
+<?php
+require_once('./mysql.php');
+echo "<pre>";
+$id=isset($_GET['id'])?$_GET['id']:"";
+$sql="select * from article where id = '$id'";
+$res=my_query($sql);
+$row=mysql_fetch_assoc($res);
+var_dump($row);
+?>
+<form action="./update.php" method="post" enctype="multipart/form-data">
+
+<input type="hidden" name="id" value="<?php echo $row['id']?>" >
+标题：<input type="text" name="title" value="<?php echo $row['title']?>"><br/>
+作者：<input type="text" name="author" value="<?php echo $row['author']?>"><br/>
+类型：<input type="text" name="type" value="<?php echo $row['type']?>"><br/>
+是否显示：<input type="text" name="is_show" value="<?php echo $row['is_show']?>"><br/>
+描述：<input type="text" name="description" value="<?php echo $row['description']?>"><br/>
+内容：<input type="text" name="content" value="<?php echo $row['content']?>"><br/>
+选择图片：<input type="file" name="photo[]" ><br/>
+选择图片：<input type="file" name="photo[]" ><br/>
+选择图片：<input type="file" name="photo[]" ><br/>
+
+<input type="submit" value="提交"></input>
+</form>
+
+</body>
+</html>
